@@ -7,14 +7,12 @@ const ytSearch = require("yt-search");
 module.exports = {
   config: {
     name: "music",
-    aliases: ["music", "play", "song"],
     version: "1.0.1",
     hasPermssion: 0,
-    credits: "mr.aaryan",
+    credits: "AADI SHRIVTASTAV",///don't change my Credit Coz i Edit 
     description: "Download YouTube song from keyword search and link",
     commandCategory: "Media",
     usages: "[songName] [type]",
-    prefix: "true",
     cooldowns: 5,
     dependencies: {
       "node-fetch": "",
@@ -37,7 +35,7 @@ module.exports = {
     }
 
     const processingMessage = await api.sendMessage(
-      "✅ Processing your request. Please wait...",
+      "✅Apki Request Jari Hai Please wait...",
       event.threadID,
       null,
       event.messageID
@@ -56,7 +54,7 @@ module.exports = {
 
       // Construct API URL for downloading the top result
       const apiKey = "priyansh-here";
-      const apiUrl = `https://priyansh-ai.onrender.com/youtube?id=${videoId}&type=${type}&apikey=${apiKey}`;
+      const apiUrl = `https://priyanshu-ai.onrender.com/youtube?id=${videoId}&type=${type}&apikey=${apiKey}`;
 
       api.setMessageReaction("⌛", event.messageID, () => {}, true);
 
@@ -64,11 +62,19 @@ module.exports = {
       const downloadResponse = await axios.get(apiUrl);
       const downloadUrl = downloadResponse.data.downloadUrl;
 
-      const response = await fetch(downloadUrl);
+      // Set request headers
+      const headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Referer': 'https://cnvmp3.com/',
+        'Cookie': '_ga=GA1.1.1062081074.1735238555; _ga_MF283RRQCW=GS1.1.1735238554.1.1.1735239728.0.0.0',
+      };
+
+      const response = await fetch(downloadUrl, { headers });
+
       if (!response.ok) {
-        throw new Error(
-          `Failed to fetch song. Status code: ${response.status}`
-        );
+        throw new Error(`Failed to fetch song. Status code: ${response.status}`);
       }
 
       // Set the filename based on the song title and type
@@ -85,9 +91,8 @@ module.exports = {
       await api.sendMessage(
         {
           attachment: fs.createReadStream(downloadPath),
-          body: `🖤 Title: ${topResult.title}\n\n Here is your ${
-            type === "audio" ? "audio" : "video"
-          } 🎧:`,
+          body: `🖤 Title: ${topResult.title}\n\n  »»𝑶𝑾𝑵𝑬𝑹««★™  »»𝐏𝐑𝐈𝐍𝐂𝐄 𝐌𝐄𝐆𝐇𝐖𝐀𝐍𝐒𝐈««
+          🥀𝒀𝑬 𝑳𝑶 𝑩𝑨𝑩𝒀 𝑨𝑷𝑲𝑰💞 ${type === "audio" ? "audio" : "video"} 🎧:`,
         },
         event.threadID,
         () => {
