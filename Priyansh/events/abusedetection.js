@@ -16,7 +16,7 @@ module.exports = {
     description: "गाली पकड़कर पहली बार चेतावनी और दूसरी बार बाहर कर देगा"
   },
 
-  onEvent: async function({ api, event, Users }) {
+  module.exports.run = async function({ api, event, Users }) {
     try {
       const { threadID, messageID, body, senderID } = event;
       if (!body) return;
